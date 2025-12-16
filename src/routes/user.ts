@@ -1,12 +1,14 @@
 import { AppDataSource } from '@/config/db';
 import { User } from '@/entities/User';
+import auth from '@/middlewares/auth';
+import { requirePerm } from '@/middlewares/guard';
 import Router from '@koa/router';
 import { Context } from 'koa';
 
 // 定义前缀
 const router = new Router({ prefix: '/api/users' });
 
-router.get('/', async (ctx: Context) => {
+router.get('/', auth, requirePerm('user:list'), async (ctx: Context) => {
   const userRepository = AppDataSource.getRepository(User)
   const users = await userRepository.find();
   ctx.success(users)
