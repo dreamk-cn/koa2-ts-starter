@@ -6,7 +6,7 @@ import path from 'path';
 
 // 引入自定义模块
 import { config } from '@/config/config'
-import userRouter from '@/routes/user';
+import router from '@/routes';
 import responseHandler from '@/middlewares/responseHandler';
 
 const app = new Koa();
@@ -18,7 +18,7 @@ app.use(serve(path.join(__dirname, '../public'))); // 静态文件服务
 app.use(responseHandler); // 全局相应处理
 
 // 挂载路由
-app.use(userRouter.routes()).use(userRouter.allowedMethods());
+app.use(router.routes()).use(router.allowedMethods());
 
 // 错误处理
 app.on('error', (err: Error, ctx: Context) => {
