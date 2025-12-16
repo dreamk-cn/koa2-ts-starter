@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "Node16",
+    "moduleResolution": "Node16",
+    
+    /* --- 路径别名配置，需要配合tsc-alias --- */
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    
+    "outDir": "./dist",
+    "rootDir": "./src",
+    
+    /* 严格检查 */
+    "strict": true,
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"],
+
+  /* 这会让 nodemon/ts-node 在开发运行时自动识别 @/ */
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
+  }
+}

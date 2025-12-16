@@ -1,0 +1,13 @@
+# 强制所有文本文件在提交时转换为 LF，在检出时也保持 LF
+* text=auto eol=lf
+
+# 保持 Windows 批处理文件为 CRLF (如果有的话)
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# 图片等二进制文件不做处理
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary

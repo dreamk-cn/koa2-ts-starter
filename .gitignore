@@ -1,0 +1,28 @@
+# --- 依赖 ---
+node_modules/
+pnpm-debug.log*
+npm-debug.log*
+yarn-error.log*
+
+# --- 构建输出 ---
+dist/
+build/
+*.tsbuildinfo
+
+# --- 环境变量 ---
+.env
+.env.local
+.env.*.local
+
+# --- 操作系统文件 ---
+.DS_Store
+Thumbs.db
+
+# --- 编辑器配置 (可选) ---
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# --- 测试覆盖率 (todo) ---
+coverage/
