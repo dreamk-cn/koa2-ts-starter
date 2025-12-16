@@ -14,5 +14,5 @@
 
 ### 1. 克隆项目
 ```bash
-git clone https://github.com/<你的用户名>/koa2-ts-starter.git my-project
+git clone https://github.com/dreamk-cn/koa2-ts-starter.git my-project
 cd my-project
