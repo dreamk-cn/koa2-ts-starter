@@ -1,7 +1,7 @@
 {
   "name": "koa-ts-starter",
   "version": "1.0.0",
-  "description": "",
+  "description": "An optimized backend project starter featuring Koa2, TypeScript, and pnpm",
   "main": "index.js",
   "scripts": {
   "dev": "nodemon src/app.ts",
@@ -10,8 +10,8 @@
   "lint": "eslint src",
   "format": "prettier --write \"src/**/*.ts\""
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["koa", "typescript", "pnpm"],
+  "author": "dreamk",
   "license": "ISC",
   "packageManager": "pnpm@10.16.0",
   "dependencies": {
