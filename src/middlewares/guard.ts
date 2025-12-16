@@ -1,4 +1,12 @@
+import { User } from '@/entities/User';
 import { Context, Next } from 'koa';
+
+declare module 'koa' {
+  interface DefaultState {
+    user?: User;
+    permissions?: string[]; // 存放当前用户拥有的所有权限标识 (e.g. ['user:add', 'sys:log'])
+  }
+}
 
 /**
  * 权限守卫：判断当前用户是否拥有指定权限
@@ -11,7 +19,7 @@ export const requirePerm = (perm: string) => {
 
     // 超级管理员特权 (如果你的 sys_role 表里有 super_admin，可以在这里放行)
     const user = ctx.state.user;
-    const isSuperAdmin = user?.roles.some(r => r.roleCode === 'super_admin');
+    const isSuperAdmin = user?.roles?.some(r => r?.roleCode === 'super_admin');
     
     // 校验
     if (isSuperAdmin || userPerms.includes(perm)) {
