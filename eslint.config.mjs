@@ -4,20 +4,20 @@ import tseslint from "typescript-eslint";
 import prettierConfig from "eslint-config-prettier";
 
 export default [
-  // 1. 指定检查的文件类型
+  // 指定检查的文件类型
   { files: ["**/*.{js,mjs,cjs,ts}"] },
 
-  // 2. 配置全局变量环境 (Node.js)
+  // 配置全局变量环境 (Node.js)
   { languageOptions: { globals: globals.node } },
 
-  // 3. 引入推荐配置
+  // 引入推荐配置
   pluginJs.configs.recommended, // JS 推荐配置
   ...tseslint.configs.recommended, // TS 推荐配置
 
-  // 4. 关闭与 Prettier 冲突的 ESLint 规则
+  // 关闭与 Prettier 冲突的 ESLint 规则
   prettierConfig,
 
-  // 5. 自定义规则
+  // 自定义规则
   {
     rules: {
       // 允许使用 any (前期开发方便，后期建议关掉)
@@ -29,7 +29,7 @@ export default [
     },
   },
   
-  // 6. 忽略文件夹 (替代 .eslintignore)
+  // 忽略文件夹 (替代 .eslintignore)
   {
     ignores: ["dist/*", "node_modules/*"],
   }

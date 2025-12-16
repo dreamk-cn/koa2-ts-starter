@@ -2,7 +2,7 @@ import { Context, Next } from 'koa';
 
 const responseHandler = async (ctx: Context, next: Next) => {
   try {
-    // 这里的 ctx.success 现在会有智能提示了！
+
     ctx.success = (data: any = null, msg: string = 'success') => {
       ctx.body = {
         code: 0,
@@ -10,6 +10,14 @@ const responseHandler = async (ctx: Context, next: Next) => {
         data,
       };
     };
+
+    ctx.error = (code = 400, msg: string = 'error') => {
+      ctx.body = {
+        code,
+        msg,
+        data: null,
+      };
+    }
 
     await next();
 

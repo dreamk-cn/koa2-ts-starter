@@ -4,5 +4,6 @@ declare module 'koa' {
   // 扩展 Context 接口
   interface Context {
     success: (data?: any, msg?: string) => void;
+    error: (code?: number, msg?: string) => void;
   }
 }
