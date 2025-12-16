@@ -1,12 +1,15 @@
+import { AppDataSource } from '@/config/db';
+import { User } from '@/entities/User';
 import Router from '@koa/router';
 import { Context } from 'koa';
 
 // 定义前缀
 const router = new Router({ prefix: '/api/users' });
 
-router.get('/list', async (ctx: Context) => {
-  console.warn(ctx.body)
-  ctx.success([{ name: 'Tom' }, { name: 'Jerry' }], '获取用户列表成功');
+router.get('/', async (ctx: Context) => {
+  const userRepository = AppDataSource.getRepository(User)
+  const users = await userRepository.find();
+  ctx.success(users)
 });
 
 router.get('/:id', async (ctx: Context) => {

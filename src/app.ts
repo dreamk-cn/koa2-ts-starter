@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import Koa, { Context } from 'koa';
 import bodyParser from 'koa-bodyparser';
 import cors from '@koa/cors';
@@ -8,6 +9,12 @@ import path from 'path';
 import { config } from '@/config/config'
 import router from '@/routes';
 import responseHandler from '@/middlewares/responseHandler';
+import { AppDataSource } from './config/db';
+AppDataSource.initialize().then(() => {
+  console.log('数据源已初始化！');
+}).catch((err) => {
+  console.error('数据源初始化期间出错：', err);
+});
 
 const app = new Koa();
 
