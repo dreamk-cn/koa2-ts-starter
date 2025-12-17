@@ -4,6 +4,7 @@
   "description": "An optimized backend project starter featuring Koa2, TypeScript, and pnpm",
   "main": "index.js",
   "scripts": {
+    "dev-bun": "bun --hot run src/app.ts ",
     "dev": "nodemon src/app.ts",
     "build": "tsc && tsc-alias",
     "start": "node dist/app.js",
