@@ -1,39 +1,22 @@
-import { AppDataSource } from '@/config/db';
-import { User } from '@/entities/User';
+import Router from '@koa/router';
+import UserController from '@/controllers/user';
 import auth from '@/middlewares/auth';
 import { requirePerm } from '@/middlewares/guard';
-import Router from '@koa/router';
-import { Context } from 'koa';
+import { validate } from '@/middlewares/validate';
+import { RegisterSchema } from '@/schemas/auth';
+import { AssignRolesSchema, UserDeleteSchema, UserDetailSchema, UserListSchema, UserUpdateSchema } from '@/schemas/user';
 
-// 定义前缀
 const router = new Router({ prefix: '/api/users' });
 
-router.get('/', auth, requirePerm('user:list'), async (ctx: Context) => {
-  const userRepository = AppDataSource.getRepository(User)
-  const users = await userRepository.find();
-  ctx.success(users)
-});
+// 全局应用 auth 中间件
+router.use(auth);
 
-router.get('/:id', async (ctx: Context) => {
-  const { id } = ctx.params;
-
-  if (id === '1')
-    return ctx.error(400, '用户不存在');
-
-  return ctx.success({ id, name: 'Tom' }, '获取用户详情成功');
-})
-
-router.post('/', async (ctx: Context) => {
-  const data = ctx.request.body;
-  ctx.success(data, '创建用户成功');
-});
-
-router.delete('/:id', async (ctx: Context) => {
-
-  const { id } = ctx.params;
-
-  ctx.success(id, '删除用户成功');
-
-});
+// 定义路由 + 权限控制
+router.get('/', requirePerm('sys:user:list'), validate(UserListSchema), UserController.getList);
+router.get('/:id', requirePerm('sys:user:list'), validate(UserDetailSchema), UserController.getDetail);
+router.post('/', requirePerm('sys:user:add'), validate(RegisterSchema), UserController.create);
+router.put('/:id', requirePerm('sys:user:edit'), validate(UserUpdateSchema), UserController.update);
+router.delete('/:id', requirePerm('sys:user:delete'), validate(UserDeleteSchema), UserController.delete);
+router.post('/:id/roles', requirePerm('sys:user:assign'), validate(AssignRolesSchema), UserController.assignRoles);
 
 export default router;
