@@ -1,12 +1,4 @@
-import { User } from '@/entities/User';
 import { Context, Next } from 'koa';
-
-declare module 'koa' {
-  interface DefaultState {
-    user?: User;
-    permissions?: string[]; // 存放当前用户拥有的所有权限标识 (e.g. ['user:add', 'sys:log'])
-  }
-}
 
 /**
  * 权限守卫：判断当前用户是否拥有指定权限

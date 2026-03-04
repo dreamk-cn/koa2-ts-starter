@@ -29,6 +29,7 @@
 
   /* 这会让 nodemon/ts-node 在开发运行时自动识别 @/ */
   "ts-node": {
-    "require": ["tsconfig-paths/register"]
+    "require": ["tsconfig-paths/register"],
+    "files": true
   }
 }
