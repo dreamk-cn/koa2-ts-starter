@@ -1,8 +1,8 @@
-import type { DefaultState, DefaultContext } from 'koa';
+import 'koa'
 import { User } from '@/entities/User';
 
 declare module 'koa' {
-  // 扩展 Context 接口
+  // 扩展 Context(ctx) 类型
   interface Context {
     // 自定义ctx方法
     success: (data?: any, msg?: string) => void;
@@ -11,6 +11,7 @@ declare module 'koa' {
     params: any;
   }
 
+  // 扩展 DefaultState(state) 类型
   interface DefaultState {
     user?: User;
     permissions?: string[]; // 存放当前用户拥有的所有权限标识 (e.g. ['user:add', 'sys:log'])
