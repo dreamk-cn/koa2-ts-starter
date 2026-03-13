@@ -1,5 +1,4 @@
 import 'koa'
-import { User } from '@/entities/User';
 
 declare module 'koa' {
   // 扩展 Context(ctx) 类型
@@ -13,7 +12,6 @@ declare module 'koa' {
 
   // 扩展 DefaultState(state) 类型
   interface DefaultState {
-    user?: User;
-    permissions?: string[]; // 存放当前用户拥有的所有权限标识 (e.g. ['user:add', 'sys:log'])
+    // permissions?: string[]; // 存放当前用户拥有的所有权限标识 (e.g. ['user:add', 'sys:log'])
   }
 }
