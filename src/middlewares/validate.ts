@@ -2,15 +2,18 @@ import { Context, Next } from 'koa';
 import { ZodType } from 'zod';
 import { ZodError } from 'zod';
 
-export const validate = (schema: ZodType) => {
+export const validate = <T extends any>(schema: ZodType<T>) => {
   return async (ctx: Context, next: Next) => {
     try {
       // 校验请求体、查询参数等
-      schema.parse({
+      const validatedData = await schema.parseAsync({
         body: ctx.request.body,
         query: ctx.query,
         params: ctx.params,
       });
+
+      ctx.state.validated = validatedData
+    
       await next();
     } catch (error) {
       if (error instanceof ZodError) {

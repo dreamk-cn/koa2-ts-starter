@@ -12,6 +12,7 @@ declare module 'koa' {
 
   // 扩展 DefaultState(state) 类型
   interface DefaultState {
-    // permissions?: string[]; // 存放当前用户拥有的所有权限标识 (e.g. ['user:add', 'sys:log'])
+    /** 存放zod校验后的数据 */
+    validated?: any;
   }
 }
