@@ -2,7 +2,7 @@ import { Context, Next } from 'koa';
 import { ZodType } from 'zod';
 import { ZodError } from 'zod';
 
-export const validate = <T extends any>(schema: ZodType<T>) => {
+export const validate = <T extends Record<string, unknown>>(schema: ZodType<T>) => {
   return async (ctx: Context, next: Next) => {
     try {
       // 校验请求体、查询参数等
