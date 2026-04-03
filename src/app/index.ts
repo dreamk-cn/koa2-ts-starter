@@ -14,7 +14,7 @@ const app = new Koa();
 // 中间件
 app.use(cors()); // 允许跨域
 app.use(bodyParser()); // 解析请求体
-app.use(serve(path.join(__dirname, '../public'))); // 静态文件服务
+app.use(serve(path.join(__dirname, '../../public'))); // 静态文件服务
 app.use(responseHandler); // 全局相应处理
 
 // 挂载路由
