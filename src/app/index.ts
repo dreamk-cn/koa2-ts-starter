@@ -8,6 +8,7 @@ import http from 'http'
 // 引入自定义模块
 import router from '@/routes';
 import responseHandler from './responseHandler';
+import { requestLogger } from '@/middlewares/requestLogger';
 
 const app = new Koa();
 
@@ -15,6 +16,7 @@ const app = new Koa();
 app.use(cors()); // 允许跨域
 app.use(bodyParser()); // 解析请求体
 app.use(serve(path.join(__dirname, '../../public'))); // 静态文件服务
+app.use(requestLogger); // 最小请求日志
 app.use(responseHandler); // 全局相应处理
 
 // 挂载路由
