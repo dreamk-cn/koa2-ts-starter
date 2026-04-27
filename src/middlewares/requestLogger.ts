@@ -1,4 +1,4 @@
-import { Context, Next } from 'koa';
+import type { Context, Next } from 'koa';
 
 export async function requestLogger(ctx: Context, next: Next) {
   const startAt = Date.now();

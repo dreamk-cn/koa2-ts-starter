@@ -1,6 +1,6 @@
 import { validate } from '@/middlewares/validate';
 import Router from '@koa/router';
-import { Context } from 'koa';
+import type { Context } from 'koa';
 import z from 'zod';
 
 const router = new Router();

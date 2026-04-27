@@ -1,4 +1,5 @@
-import Koa, { Context } from 'koa';
+import Koa from 'koa';
+import type { Context } from 'koa';
 import bodyParser from 'koa-bodyparser';
 import cors from '@koa/cors';
 import serve from 'koa-static';

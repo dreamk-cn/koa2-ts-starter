@@ -1,4 +1,4 @@
-import { Context, Next } from 'koa';
+import type { Context, Next } from 'koa';
 import { ZodType } from 'zod';
 import { ZodError } from 'zod';
 
