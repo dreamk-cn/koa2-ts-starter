@@ -1,6 +1,6 @@
-# Koa2 TypeScript Starter
+# Koa3 TypeScript Starter
 
-这是一个基于 Koa2 + TypeScript + pnpm 的后端起始项目模板。
+这是一个基于 Koa3 + TypeScript + pnpm 的后端起始项目模板。
 
 ## ✨ 特性
 
@@ -14,5 +14,5 @@
 
 ### 1. 克隆项目
 ```bash
-git clone https://github.com/dreamk-cn/koa2-ts-starter.git my-project
+git clone https://github.com/dreamk-cn/koa3-ts-starter.git my-project
 cd my-project
