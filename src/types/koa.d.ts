@@ -1,18 +1,16 @@
-import 'koa'
+import 'koa';
 
 declare module 'koa' {
-  // 扩展 Context(ctx) 类型
   interface Context {
-    // 自定义ctx方法
-    success: (data?: any, msg?: string) => void;
-    error: (code?: number, msg?: string) => void;
-    // @koa2/router 的 params 类型
-    params: any;
+    ok: <T>(data?: T | null, msg?: string) => void;
+    /** 业务失败，写入 body.code，不改 HTTP status */
+    fail: (code: number, msg: string) => void;
+    /** @deprecated 使用 fail，保留别名便于迁移 */
+    error: (code: number, msg: string) => void;
+    params: Record<string, string>;
   }
 
-  // 扩展 DefaultState(state) 类型
   interface DefaultState {
-    /** 存放zod校验后的数据 */
-    validated?: any;
+    validated?: unknown;
   }
 }

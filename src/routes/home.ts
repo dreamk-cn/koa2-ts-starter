@@ -27,7 +27,7 @@ router.post('/validate', validate(userSchema), async (ctx) => {
   console.warn('parseBody', body)
   console.warn('rawBody', rawBody)
 
-  return ctx.success({ rawBody, body})
+  return ctx.ok({ rawBody, body });
 })
 
 export default router;

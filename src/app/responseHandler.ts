@@ -1,40 +1,19 @@
 import type { Context, Next } from 'koa';
 
+import { mapError } from '@/app/mapError';
+import { envelope } from '@/types/api';
+
+/** 全局错误捕获与 404 信封；不修改 ctx.status，业务语义用 body.code */
 const responseHandler = async (ctx: Context, next: Next) => {
   try {
-
-    ctx.success = (data: any = null, msg: string = 'success') => {
-      ctx.body = {
-        code: 0,
-        msg,
-        data,
-      };
-    };
-
-    ctx.error = (code = 400, msg: string = 'error') => {
-      ctx.body = {
-        code,
-        msg,
-        data: null,
-      };
-    }
-
     await next();
 
-    if (ctx.status === 404 && !ctx.body) {
-      ctx.body = { code: 404, msg: 'Not Found' };
+    if (!ctx.body && ctx.status === 404) {
+      ctx.body = envelope.fail(404, 'Not Found');
     }
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error('全局错误捕获:', err);
-    const statusCode = err.status || 500;
-    const errorMsg = err.message || 'Internal Server Error';
-
-    ctx.status = statusCode;
-    ctx.body = {
-      code: statusCode,
-      msg: errorMsg,
-      data: null,
-    };
+    ctx.body = mapError(err);
   }
 };
 

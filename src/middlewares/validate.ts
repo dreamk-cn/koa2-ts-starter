@@ -1,24 +1,25 @@
 import type { Context, Next } from 'koa';
-import { ZodType } from 'zod';
-import { ZodError } from 'zod';
+import { ZodType, ZodError } from 'zod';
+
+import { AppError } from '@/errors/AppError';
 
 export const validate = <T extends Record<string, unknown>>(schema: ZodType<T>) => {
   return async (ctx: Context, next: Next) => {
     try {
-      // 校验请求体、查询参数等
       const validatedData = await schema.parseAsync({
         body: ctx.request.body,
         query: ctx.query,
         params: ctx.params,
       });
 
-      ctx.state.validated = validatedData
-    
+      ctx.state.validated = validatedData;
+
       await next();
     } catch (error) {
       if (error instanceof ZodError) {
-        ctx.error(400, error.issues.pop()?.message ?? '参数校验失败')
+        throw new AppError(400, error.issues[0]?.message ?? '参数校验失败');
       }
+      throw error;
     }
   };
 };

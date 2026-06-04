@@ -8,10 +8,12 @@ import http from 'http'
 
 // 引入自定义模块
 import router from '@/routes';
+import { extendContext } from './context';
 import responseHandler from './responseHandler';
 import { requestLogger } from '@/middlewares/requestLogger';
 
 const app = new Koa();
+extendContext(app);
 
 // 中间件
 app.use(cors()); // 允许跨域
